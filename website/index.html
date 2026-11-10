@@ -6,119 +6,385 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050914">
 <title>CASSIUS TRADING TECHNOLOGIES</title>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#050914;color:#fff;font-family:Arial,sans-serif;line-height:1.6}
-header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #172744}
-.logo{font-size:21px;font-weight:bold;color:#3298ff}
-nav a{color:#c6d4e8;text-decoration:none;margin-left:18px;font-size:14px}
-.hero{text-align:center;padding:90px 20px 75px;background:radial-gradient(circle at top,#102c55,#050914 65%)}
-.tag{color:#3298ff;font-size:12px;letter-spacing:3px;font-weight:bold}
-h1{font-size:clamp(34px,7vw,58px);line-height:1.15;margin:20px auto;max-width:850px}
+html{scroll-behavior:smooth}
+body{
+background:#050914;
+color:#fff;
+font-family:Arial,sans-serif;
+line-height:1.6;
+}
+header{
+min-height:75px;
+padding:15px 7%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#080f1e;
+border-bottom:1px solid #1b3558;
+position:sticky;
+top:0;
+z-index:100;
+}
+.logo{
+font-size:21px;
+font-weight:bold;
+color:#3298ff;
+}
+nav{
+display:flex;
+align-items:center;
+gap:25px;
+}
+nav a{
+color:#c6d4e8;
+text-decoration:none;
+font-size:14px;
+}
+nav a:hover{color:#3298ff}
+.menu-btn{
+display:none;
+background:none;
+border:1px solid #28476c;
+color:white;
+padding:8px 12px;
+border-radius:6px;
+font-size:22px;
+cursor:pointer;
+}
+.hero{
+text-align:center;
+padding:100px 20px 85px;
+background:radial-gradient(circle at top,#153967,#050914 68%);
+}
+.tag{
+color:#3298ff;
+font-size:12px;
+letter-spacing:3px;
+font-weight:bold;
+}
+h1{
+font-size:clamp(34px,7vw,60px);
+line-height:1.15;
+margin:22px auto;
+max-width:850px;
+}
 h1 span{color:#3298ff}
-.hero p{color:#aabbd2;max-width:650px;margin:0 auto 28px}
-.btn{display:inline-block;padding:13px 24px;background:#1677e8;color:white;border-radius:7px;text-decoration:none;font-weight:bold}
-section{padding:65px 7%}
-.section-title{text-align:center;font-size:30px;margin-bottom:35px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:#0c1729;border:1px solid #1c3557;border-radius:12px;padding:25px}
-.card h3{color:#55aaff;margin-bottom:12px}
-.card p{color:#aabbd2;font-size:14px}
-.dashboard{background:#081426;border:1px solid #1b385c;border-radius:14px;padding:25px;max-width:850px;margin:auto}
-.status{display:inline-block;color:#ffca68;background:#332912;padding:5px 12px;border-radius:20px;font-size:12px}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:22px}
-.stat{background:#101f35;padding:18px;border-radius:9px}
+.hero p{
+color:#aabbd2;
+max-width:650px;
+margin:0 auto 30px;
+}
+.btn{
+display:inline-block;
+padding:13px 25px;
+background:#1677e8;
+color:white;
+border-radius:7px;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+.btn:hover{
+background:#3298ff;
+transform:translateY(-3px);
+}
+section{padding:75px 7%}
+.section-title{
+text-align:center;
+font-size:30px;
+margin-bottom:40px;
+}
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:22px;
+}
+.card{
+background:#0c1729;
+border:1px solid #1c3557;
+border-radius:12px;
+padding:27px;
+transition:.3s;
+}
+.card:hover{
+transform:translateY(-5px);
+border-color:#3298ff;
+}
+.card h3{
+color:#55aaff;
+margin-bottom:12px;
+}
+.card p{
+color:#aabbd2;
+font-size:14px;
+}
+.dashboard{
+background:#081426;
+border:1px solid #1b385c;
+border-radius:14px;
+padding:28px;
+max-width:900px;
+margin:auto;
+}
+.status{
+display:inline-block;
+color:#ffca68;
+background:#332912;
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;
+}
+.stat-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin-top:25px;
+}
+.stat{
+background:#101f35;
+padding:20px;
+border-radius:9px;
+}
 .stat small{color:#9db1ca}
-.stat strong{display:block;font-size:20px;color:#55aaff;margin-top:5px}
-ul{padding-left:20px;color:#b7c7da}
-li{margin:9px 0}
-footer{text-align:center;padding:30px;color:#8295af;border-top:1px solid #172744;font-size:13px}
+.stat strong{
+display:block;
+font-size:18px;
+color:#55aaff;
+margin-top:7px;
+}
+.mission{text-align:center}
+.mission .dashboard{
+max-width:800px;
+}
+footer{
+text-align:center;
+padding:35px 15px;
+color:#8295af;
+border-top:1px solid #172744;
+font-size:13px;
+}
+footer p{margin:6px}
+@media(max-width:700px){
+header{padding:14px 5%}
+.menu-btn{display:block}
+nav{
+display:none;
+position:absolute;
+top:74px;
+left:0;
+width:100%;
+background:#0b172a;
+padding:20px;
+flex-direction:column;
+align-items:stretch;
+gap:0;
+border-bottom:1px solid #28476c;
+}
+nav.open{display:flex}
+nav a{
+padding:13px 10px;
+border-bottom:1px solid #1b3558;
+}
+.hero{padding:75px 20px 65px}
+section{padding:55px 5%}
+.section-title{font-size:25px}
+.cards{grid-template-columns:1fr}
+.stat-grid{grid-template-columns:repeat(2,1fr)}
+.dashboard{padding:19px}
+.stat{padding:14px}
+.stat strong{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{
+scroll-behavior:auto!important;
+transition:none!important;
+}
+}
 </style>
 </head>
+
 <body>
 
 <header>
 <div class="logo">CASSIUS FX</div>
-<nav>
+
+<button class="menu-btn"
+id="menuBtn"
+aria-label="Open navigation menu"
+aria-expanded="false"
+aria-controls="mainNav">☰</button>
+
+<nav id="mainNav">
 <a href="#home">Home</a>
 <a href="#technology">Technology</a>
 <a href="#dashboard">Dashboard</a>
 <a href="#plans">Plans</a>
+<a href="#mission">About</a>
 </nav>
 </header>
 
 <main>
+
 <section class="hero" id="home">
 <div class="tag">SMARTER TRADING TECHNOLOGY</div>
+
 <h1>Trade Smarter With <span>CASSIUS FX</span></h1>
-<p>Explore automated trading technology, market analysis tools and intelligent trading solutions designed to support informed trading decisions.</p>
+
+<p>
+Explore automated trading technology, market analysis
+tools and intelligent trading solutions designed to
+support informed trading decisions.
+</p>
+
 <a class="btn" href="#technology">Explore Our Technology</a>
 </section>
 
 <section id="technology">
 <h2 class="section-title">Our Technology</h2>
+
 <div class="cards">
+
 <div class="card">
 <h3>CASSIUS FX Analyzer</h3>
-<p>A planned market analysis platform designed to display market information and technical indicators.</p>
+<p>
+A market analysis platform designed to display
+market information and technical indicators.
+</p>
 </div>
+
 <div class="card">
 <h3>Automated Trading</h3>
-<p>Explore our planned MetaTrader 5 integration and automated trading technology.</p>
+<p>
+Explore our planned MetaTrader 5 integration
+and automated trading technology.
+</p>
 </div>
+
 <div class="card">
 <h3>Market Intelligence</h3>
-<p>Tools for exploring price movements, market trends and technical analysis.</p>
+<p>
+Tools for exploring price movements,
+market trends and technical analysis.
+</p>
 </div>
+
 </div>
 </section>
 
 <section id="dashboard">
 <h2 class="section-title">Trading Technology Dashboard</h2>
+
 <div class="dashboard">
-<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
 <h3>CASSIUS FX Analyzer v1.0</h3>
 <span class="status">DEMO PREVIEW</span>
 </div>
+
 <div class="stat-grid">
-<div class="stat"><small>Platform</small><strong>MT5</strong></div>
-<div class="stat"><small>Robot Status</small><strong>Not connected</strong></div>
-<div class="stat"><small>Market Data</small><strong>Unavailable</strong></div>
-<div class="stat"><small>Account</small><strong>Demo</strong></div>
+
+<div class="stat">
+<small>Platform</small>
+<strong>MT5</strong>
 </div>
-<p style="color:#91a7c2;margin-top:22px;font-size:13px">This is a demonstration interface. No live market data, trading signals or automated orders are currently connected.</p>
+
+<div class="stat">
+<small>Robot Status</small>
+<strong>Not connected</strong>
+</div>
+
+<div class="stat">
+<small>Market Data</small>
+<strong>Unavailable</strong>
+</div>
+
+<div class="stat">
+<small>Account</small>
+<strong>Demo</strong>
+</div>
+
+</div>
+
+<p style="color:#91a7c2;margin-top:22px;font-size:13px">
+Demonstration interface. Live market data and
+automated trading are not connected.
+</p>
+
 </div>
 </section>
 
 <section id="plans">
 <h2 class="section-title">Our Access Plans</h2>
+
 <div class="cards">
+
 <div class="card">
 <h3>Free Access</h3>
-<p>Explore the CASSIUS platform and its available introductory features.</p>
+<p>
+Explore the CASSIUS platform and its available
+introductory features.
+</p>
 </div>
+
 <div class="card">
 <h3>Premium Access</h3>
-<p>Planned advanced platform features. Pricing and availability will be announced later.</p>
+<p>
+Planned advanced platform features.
+Pricing and availability will be announced later.
+</p>
 </div>
+
 </div>
 </section>
 
-<section>
+<section id="mission" class="mission">
 <h2 class="section-title">Our Mission</h2>
+
 <div class="dashboard">
-<p style="color:#b7c7da;text-align:center">CASSIUS TRADING TECHNOLOGIES aims to make trading technology and market analysis tools more accessible through innovative software development.</p>
+<p style="color:#b7c7da">
+CASSIUS TRADING TECHNOLOGIES aims to make
+trading technology and market analysis tools
+more accessible through innovative software
+development.
+</p>
 </div>
 </section>
+
 </main>
 
 <footer>
 <p><strong>CASSIUS TRADING TECHNOLOGIES</strong></p>
 <p>Technology • Innovation • Market Intelligence</p>
-<p style="margin-top:10px">© 2026 CASSIUS. All rights reserved.</p>
+<p>© 2026 CASSIUS. All rights reserved.</p>
 <p>Trading involves risk. No profits or returns are guaranteed.</p>
 </footer>
 
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const mainNav = document.getElementById("mainNav");
+
+menuBtn.addEventListener("click", function(){
+const isOpen = mainNav.classList.toggle("open");
+menuBtn.setAttribute("aria-expanded", isOpen);
+menuBtn.setAttribute(
+"aria-label",
+isOpen ? "Close navigation menu" : "Open navigation menu"
+);
+menuBtn.textContent = isOpen ? "✕" : "☰";
+});
+
+mainNav.querySelectorAll("a").forEach(function(link){
+link.addEventListener("click", function(){
+mainNav.classList.remove("open");
+menuBtn.setAttribute("aria-expanded", "false");
+menuBtn.setAttribute("aria-label", "Open navigation menu");
+menuBtn.textContent = "☰";
+});
+});
+</script>
+
 </body>
 </html>
-
