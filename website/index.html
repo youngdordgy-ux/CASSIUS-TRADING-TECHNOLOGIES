@@ -5,385 +5,1186 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050914">
+
 <title>CASSIUS TRADING TECHNOLOGIES</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-background:#050914;
-color:#fff;
-font-family:Arial,sans-serif;
-line-height:1.6;
+:root {
+  --bg:#050914;
+  --panel:#0b1425;
+  --panel2:#101e33;
+  --blue:#268cff;
+  --blue2:#55b0ff;
+  --text:#f4f7ff;
+  --muted:#91a3bc;
+  --border:#1b3150;
+  --green:#35d39a;
+  --red:#ff6578;
 }
-header{
-min-height:75px;
-padding:15px 7%;
-display:flex;
-align-items:center;
-justify-content:space-between;
-background:#080f1e;
-border-bottom:1px solid #1b3558;
-position:sticky;
-top:0;
-z-index:100;
+
+body.light {
+  --bg:#edf3fa;
+  --panel:#ffffff;
+  --panel2:#e3edf8;
+  --text:#102039;
+  --muted:#60728a;
+  --border:#ccd9e9;
 }
-.logo{
-font-size:21px;
-font-weight:bold;
-color:#3298ff;
+
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
-nav{
-display:flex;
-align-items:center;
-gap:25px;
+
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  min-height:100vh;
+  transition:background .3s,color .3s;
 }
-nav a{
-color:#c6d4e8;
-text-decoration:none;
-font-size:14px;
+
+button,select {
+  font:inherit;
 }
-nav a:hover{color:#3298ff}
-.menu-btn{
-display:none;
-background:none;
-border:1px solid #28476c;
-color:white;
-padding:8px 12px;
-border-radius:6px;
-font-size:22px;
-cursor:pointer;
+
+button {
+  cursor:pointer;
 }
-.hero{
-text-align:center;
-padding:100px 20px 85px;
-background:radial-gradient(circle at top,#153967,#050914 68%);
+
+.layout {
+  display:flex;
+  min-height:100vh;
 }
-.tag{
-color:#3298ff;
-font-size:12px;
-letter-spacing:3px;
-font-weight:bold;
+
+.sidebar {
+  width:245px;
+  background:var(--panel);
+  border-right:1px solid var(--border);
+  padding:25px 16px;
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  z-index:20;
+  transition:transform .3s;
 }
-h1{
-font-size:clamp(34px,7vw,60px);
-line-height:1.15;
-margin:22px auto;
-max-width:850px;
+
+.brand {
+  padding:5px 12px 30px;
 }
-h1 span{color:#3298ff}
-.hero p{
-color:#aabbd2;
-max-width:650px;
-margin:0 auto 30px;
+
+.brand strong {
+  font-size:21px;
+  letter-spacing:1px;
+  color:var(--blue2);
 }
-.btn{
-display:inline-block;
-padding:13px 25px;
-background:#1677e8;
-color:white;
-border-radius:7px;
-text-decoration:none;
-font-weight:bold;
-transition:.3s;
+
+.brand small {
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:3px;
+  margin-top:5px;
 }
-.btn:hover{
-background:#3298ff;
-transform:translateY(-3px);
+
+.nav-label {
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:2px;
+  padding:12px;
 }
-section{padding:75px 7%}
-.section-title{
-text-align:center;
-font-size:30px;
-margin-bottom:40px;
+
+.nav-btn {
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  background:transparent;
+  color:var(--muted);
+  border:0;
+  padding:13px;
+  margin:3px 0;
+  border-radius:8px;
+  text-align:left;
+  transition:.25s;
 }
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:22px;
+
+.nav-btn:hover,
+.nav-btn.active {
+  background:rgba(38,140,255,.14);
+  color:var(--blue2);
 }
-.card{
-background:#0c1729;
-border:1px solid #1c3557;
-border-radius:12px;
-padding:27px;
-transition:.3s;
+
+.nav-icon {
+  width:22px;
+  text-align:center;
+  font-size:17px;
 }
-.card:hover{
-transform:translateY(-5px);
-border-color:#3298ff;
+
+.sidebar-bottom {
+  position:absolute;
+  bottom:25px;
+  left:25px;
+  color:var(--muted);
+  font-size:11px;
 }
-.card h3{
-color:#55aaff;
-margin-bottom:12px;
+
+.main {
+  width:calc(100% - 245px);
+  margin-left:245px;
+  min-height:100vh;
 }
-.card p{
-color:#aabbd2;
-font-size:14px;
+
+.topbar {
+  height:75px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 35px;
+  background:var(--panel);
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:10;
 }
-.dashboard{
-background:#081426;
-border:1px solid #1b385c;
-border-radius:14px;
-padding:28px;
-max-width:900px;
-margin:auto;
+
+.top-left {
+  display:flex;
+  align-items:center;
+  gap:15px;
 }
-.status{
-display:inline-block;
-color:#ffca68;
-background:#332912;
-padding:5px 12px;
-border-radius:20px;
-font-size:12px;
+
+.topbar h3 {
+  font-size:16px;
 }
-.stat-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-margin-top:25px;
+
+.top-right {
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
-.stat{
-background:#101f35;
-padding:20px;
-border-radius:9px;
+
+.demo-tag {
+  background:rgba(255,190,65,.13);
+  color:#ffc75e;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:11px;
 }
-.stat small{color:#9db1ca}
-.stat strong{
-display:block;
-font-size:18px;
-color:#55aaff;
-margin-top:7px;
+
+.icon-btn {
+  background:var(--panel2);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:9px 12px;
 }
-.mission{text-align:center}
-.mission .dashboard{
-max-width:800px;
+
+.menu-toggle {
+  display:none;
 }
-footer{
-text-align:center;
-padding:35px 15px;
-color:#8295af;
-border-top:1px solid #172744;
-font-size:13px;
+
+.content {
+  padding:35px;
+  max-width:1500px;
+  margin:auto;
 }
-footer p{margin:6px}
-@media(max-width:700px){
-header{padding:14px 5%}
-.menu-btn{display:block}
-nav{
-display:none;
-position:absolute;
-top:74px;
-left:0;
-width:100%;
-background:#0b172a;
-padding:20px;
-flex-direction:column;
-align-items:stretch;
-gap:0;
-border-bottom:1px solid #28476c;
+
+.screen {
+  display:none;
+  animation:screenIn .35s ease;
 }
-nav.open{display:flex}
-nav a{
-padding:13px 10px;
-border-bottom:1px solid #1b3558;
+
+.screen.active {
+  display:block;
 }
-.hero{padding:75px 20px 65px}
-section{padding:55px 5%}
-.section-title{font-size:25px}
-.cards{grid-template-columns:1fr}
-.stat-grid{grid-template-columns:repeat(2,1fr)}
-.dashboard{padding:19px}
-.stat{padding:14px}
-.stat strong{font-size:16px}
+
+@keyframes screenIn {
+  from {opacity:0;transform:translateY(12px)}
+  to {opacity:1;transform:translateY(0)}
 }
-@media(prefers-reduced-motion:reduce){
-*,*::before,*::after{
-scroll-behavior:auto!important;
-transition:none!important;
+
+.hero {
+  padding:50px 35px;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 85% 20%,#173e70,transparent 40%),
+    linear-gradient(120deg,#0b1930,#071020);
+  position:relative;
+  overflow:hidden;
 }
+
+.hero:after {
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  right:-100px;
+  bottom:-180px;
+  border-radius:50%;
+  border:1px solid #3298ff55;
+  box-shadow:0 0 70px #168aff30;
+  animation:pulse 4s infinite alternate;
+}
+
+@keyframes pulse {
+  to {transform:scale(1.35);opacity:.4}
+}
+
+.hero-tag {
+  color:#70baff;
+  letter-spacing:3px;
+  font-size:11px;
+}
+
+.hero h1 {
+  font-size:clamp(30px,5vw,49px);
+  line-height:1.2;
+  margin:18px 0;
+  max-width:650px;
+}
+
+.hero h1 span {
+  color:#52aaff;
+}
+
+.hero p {
+  color:#b1c2d8;
+  max-width:570px;
+  font-size:14px;
+  margin-bottom:25px;
+}
+
+.primary-btn {
+  background:linear-gradient(110deg,#1678e8,#329fff);
+  color:white;
+  border:0;
+  border-radius:8px;
+  padding:12px 20px;
+  font-weight:bold;
+  transition:.25s;
+}
+
+.primary-btn:hover {
+  transform:translateY(-3px);
+  box-shadow:0 8px 25px #168aff55;
+}
+
+.secondary-btn {
+  background:var(--panel2);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:11px 17px;
+}
+
+.section-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin:30px 0 20px;
+  flex-wrap:wrap;
+}
+
+.section-head h2 {
+  font-size:20px;
+}
+
+.section-head p {
+  font-size:12px;
+  color:var(--muted);
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:17px;
+}
+
+.card {
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:21px;
+  transition:.25s;
+}
+
+.card:hover {
+  border-color:var(--blue);
+  transform:translateY(-3px);
+}
+
+.card small {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.card h2 {
+  margin-top:12px;
+  font-size:23px;
+}
+
+.card .description {
+  font-size:11px;
+  color:var(--muted);
+  margin-top:8px;
+}
+
+.blue {color:var(--blue2)}
+.green {color:var(--green)}
+.red {color:var(--red)}
+
+.panel {
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:23px;
+  margin-top:20px;
+}
+
+.panel h3 {
+  font-size:16px;
+  margin-bottom:15px;
+}
+
+.two-col {
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:18px;
+}
+
+.chart {
+  height:220px;
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+  background:repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 53px,
+    var(--border) 54px
+  );
+}
+
+.chart svg {
+  width:100%;
+  height:100%;
+}
+
+.chart-note {
+  color:var(--muted);
+  font-size:11px;
+  margin-top:12px;
+}
+
+.status-line {
+  display:flex;
+  justify-content:space-between;
+  padding:13px 0;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+}
+
+.status-line span:last-child {
+  color:var(--muted);
+}
+
+.form-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+  margin:20px 0;
+}
+
+.field label {
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.field select {
+  width:100%;
+  padding:12px;
+  color:var(--text);
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-radius:8px;
+}
+
+.result {
+  display:none;
+  margin-top:20px;
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--panel2);
+}
+
+.result.show {
+  display:block;
+  animation:screenIn .3s ease;
+}
+
+.result h2 {
+  margin:10px 0;
+}
+
+.result p {
+  font-size:13px;
+  color:var(--muted);
+  margin-top:8px;
+}
+
+.feature-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.feature-icon {
+  font-size:27px;
+  margin-bottom:15px;
+}
+
+.large-text {
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.footer {
+  padding:25px 35px;
+  color:var(--muted);
+  font-size:11px;
+  border-top:1px solid var(--border);
+  margin-top:40px;
+}
+
+.toast {
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  background:#142b48;
+  color:white;
+  padding:13px 20px;
+  border:1px solid #3298ff;
+  border-radius:9px;
+  opacity:0;
+  transform:translateY(15px);
+  transition:.3s;
+  z-index:100;
+  pointer-events:none;
+}
+
+.toast.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media(max-width:1050px) {
+  .grid {grid-template-columns:repeat(2,1fr)}
+  .feature-grid {grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:700px) {
+  .sidebar {
+    transform:translateX(-100%);
+    width:260px;
+    box-shadow:10px 0 35px #0005;
+  }
+
+  .sidebar.open {transform:translateX(0)}
+
+  .main {
+    width:100%;
+    margin-left:0;
+  }
+
+  .topbar {padding:0 15px}
+  .menu-toggle {display:block}
+  .content {padding:18px}
+  .hero {padding:35px 22px}
+  .grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .card {padding:15px}
+  .card h2 {font-size:19px}
+  .two-col {grid-template-columns:1fr}
+  .feature-grid {grid-template-columns:1fr}
+  .form-grid {grid-template-columns:1fr}
+  .footer {padding:20px}
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation:none!important;
+    transition:none!important;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="logo">CASSIUS FX</div>
+<div class="layout">
 
-<button class="menu-btn"
-id="menuBtn"
-aria-label="Open navigation menu"
-aria-expanded="false"
-aria-controls="mainNav">☰</button>
+<aside class="sidebar" id="sidebar">
 
-<nav id="mainNav">
-<a href="#home">Home</a>
-<a href="#technology">Technology</a>
-<a href="#dashboard">Dashboard</a>
-<a href="#plans">Plans</a>
-<a href="#mission">About</a>
-</nav>
+  <div class="brand">
+    <strong>CASSIUS FX</strong>
+    <small>TRADING TECHNOLOGIES</small>
+  </div>
+
+  <div class="nav-label">WORKSPACE</div>
+
+  <button class="nav-btn active" data-screen="overview">
+    <span class="nav-icon">⌂</span> Overview
+  </button>
+
+  <button class="nav-btn" data-screen="dashboard">
+    <span class="nav-icon">▦</span> Dashboard
+  </button>
+
+  <button class="nav-btn" data-screen="analyzer">
+    <span class="nav-icon">⌁</span> FX Analyzer
+  </button>
+
+  <button class="nav-btn" data-screen="markets">
+    <span class="nav-icon">◈</span> Markets
+  </button>
+
+  <div class="nav-label">INFORMATION</div>
+
+  <button class="nav-btn" data-screen="technology">
+    <span class="nav-icon">◇</span> Technology
+  </button>
+
+  <button class="nav-btn" data-screen="plans">
+    <span class="nav-icon">▤</span> Access Plans
+  </button>
+
+  <button class="nav-btn" data-screen="about">
+    <span class="nav-icon">ⓘ</span> About Cassius
+  </button>
+
+  <div class="nav-label">PREFERENCES</div>
+
+  <button class="nav-btn" id="themeSidebar">
+    <span class="nav-icon">◐</span> Change Theme
+  </button>
+
+  <div class="sidebar-bottom">
+    CASSIUS TECHNOLOGIES<br>
+    VERSION 2.0 · DEMO
+  </div>
+
+</aside>
+
+<div class="main">
+
+<header class="topbar">
+
+  <div class="top-left">
+    <button class="icon-btn menu-toggle" id="menuToggle">☰</button>
+    <h3 id="pageTitle">Overview</h3>
+  </div>
+
+  <div class="top-right">
+    <span class="demo-tag">● DEMO MODE</span>
+    <button class="icon-btn" id="themeBtn">◐</button>
+  </div>
+
 </header>
 
-<main>
+<main class="content">
 
-<section class="hero" id="home">
-<div class="tag">SMARTER TRADING TECHNOLOGY</div>
+<!-- OVERVIEW -->
 
-<h1>Trade Smarter With <span>CASSIUS FX</span></h1>
+<section class="screen active" id="overview">
 
-<p>
-Explore automated trading technology, market analysis
-tools and intelligent trading solutions designed to
-support informed trading decisions.
-</p>
+  <div class="hero">
+    <div class="hero-tag">INTELLIGENT MARKET TECHNOLOGY</div>
 
-<a class="btn" href="#technology">Explore Our Technology</a>
+    <h1>Welcome to <span>CASSIUS FX</span></h1>
+
+    <p>
+      Explore a modern financial technology platform
+      focused on market intelligence, educational
+      analysis and innovative trading software.
+    </p>
+
+    <button class="primary-btn" data-go="dashboard">
+      Open Dashboard →
+    </button>
+  </div>
+
+  <div class="section-head">
+    <div>
+      <h2>Platform Overview</h2>
+      <p>Your technology workspace</p>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <small>Platform</small>
+      <h2 class="blue">MT5</h2>
+      <p class="description">Planned integration</p>
+    </div>
+
+    <div class="card">
+      <small>Analyzer</small>
+      <h2 class="blue">V1.0</h2>
+      <p class="description">Educational preview</p>
+    </div>
+
+    <div class="card">
+      <small>Connection</small>
+      <h2>Offline</h2>
+      <p class="description">No MT5 connection</p>
+    </div>
+
+    <div class="card">
+      <small>Environment</small>
+      <h2 class="green">Demo</h2>
+      <p class="description">Sample analysis only</p>
+    </div>
+
+  </div>
+
+  <div class="section-head">
+    <h2>Explore Our Products</h2>
+  </div>
+
+  <div class="feature-grid">
+
+    <div class="card">
+      <div class="feature-icon">📊</div>
+      <h3>FX Analyzer</h3>
+      <p class="large-text">Explore technical indicators and educational market analysis.</p>
+      <br>
+      <button class="secondary-btn" data-go="analyzer">Explore →</button>
+    </div>
+
+    <div class="card">
+      <div class="feature-icon">🌐</div>
+      <h3>Market Intelligence</h3>
+      <p class="large-text">Learn about market movements and technical concepts.</p>
+      <br>
+      <button class="secondary-btn" data-go="markets">Explore →</button>
+    </div>
+
+    <div class="card">
+      <div class="feature-icon">⚙️</div>
+      <h3>Technology</h3>
+      <p class="large-text">Discover our software development vision.</p>
+      <br>
+      <button class="secondary-btn" data-go="technology">Explore →</button>
+    </div>
+
+  </div>
+
 </section>
 
-<section id="technology">
-<h2 class="section-title">Our Technology</h2>
+<!-- DASHBOARD -->
 
-<div class="cards">
+<section class="screen" id="dashboard">
 
-<div class="card">
-<h3>CASSIUS FX Analyzer</h3>
-<p>
-A market analysis platform designed to display
-market information and technical indicators.
-</p>
-</div>
+  <div class="section-head">
+    <div>
+      <h2>Trading Dashboard</h2>
+      <p>Platform overview and system information</p>
+    </div>
+    <span class="demo-tag">DEMO ENVIRONMENT</span>
+  </div>
 
-<div class="card">
-<h3>Automated Trading</h3>
-<p>
-Explore our planned MetaTrader 5 integration
-and automated trading technology.
-</p>
-</div>
+  <div class="grid">
 
-<div class="card">
-<h3>Market Intelligence</h3>
-<p>
-Tools for exploring price movements,
-market trends and technical analysis.
-</p>
-</div>
+    <div class="card">
+      <small>Trading Platform</small>
+      <h2 class="blue">MT5</h2>
+      <p class="description">Integration planned</p>
+    </div>
 
-</div>
+    <div class="card">
+      <small>Robot Connection</small>
+      <h2 class="red">Offline</h2>
+      <p class="description">Not connected</p>
+    </div>
+
+    <div class="card">
+      <small>Account Type</small>
+      <h2>Demo</h2>
+      <p class="description">No live account</p>
+    </div>
+
+    <div class="card">
+      <small>Market Feed</small>
+      <h2>Offline</h2>
+      <p class="description">Sample data only</p>
+    </div>
+
+  </div>
+
+  <div class="two-col">
+
+    <div class="panel">
+      <h3>Market Visualization</h3>
+
+      <div class="chart">
+        <svg viewBox="0 0 600 220" preserveAspectRatio="none">
+          <polyline
+            points="0,165 35,145 70,160 105,115 140,130 175,85 210,110 245,75 280,95 315,55 350,82 385,45 420,70 455,35 490,65 525,28 560,50 600,20"
+            fill="none"
+            stroke="#3298ff"
+            stroke-width="3"
+            vector-effect="non-scaling-stroke"/>
+          <polyline
+            points="0,165 35,145 70,160 105,115 140,130 175,85 210,110 245,75 280,95 315,55 350,82 385,45 420,70 455,35 490,65 525,28 560,50 600,20 600,220 0,220"
+            fill="url(#fade)"
+            stroke="none"/>
+          <defs>
+            <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3298ff" stop-opacity=".25"/>
+              <stop offset="100%" stop-color="#3298ff" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <p class="chart-note">Illustrative chart · Not live market prices</p>
+    </div>
+
+    <div class="panel">
+      <h3>System Information</h3>
+
+      <div class="status-line">
+        <span>Website</span><span class="green">Available</span>
+      </div>
+
+      <div class="status-line">
+        <span>Analyzer</span><span>Demo</span>
+      </div>
+
+      <div class="status-line">
+        <span>MT5 connection</span><span class="red">Offline</span>
+      </div>
+
+      <div class="status-line">
+        <span>Market feed</span><span>Unavailable</span>
+      </div>
+
+      <div class="status-line">
+        <span>Backend</span><span>Not connected</span>
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
-<section id="dashboard">
-<h2 class="section-title">Trading Technology Dashboard</h2>
+<!-- ANALYZER -->
 
-<div class="dashboard">
+<section class="screen" id="analyzer">
 
-<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-<h3>CASSIUS FX Analyzer v1.0</h3>
-<span class="status">DEMO PREVIEW</span>
-</div>
+  <div class="section-head">
+    <div>
+      <h2>CASSIUS FX Analyzer</h2>
+      <p>Technical analysis educational simulator</p>
+    </div>
+    <span class="demo-tag">SIMULATION ONLY</span>
+  </div>
 
-<div class="stat-grid">
+  <div class="panel">
 
-<div class="stat">
-<small>Platform</small>
-<strong>MT5</strong>
-</div>
+    <h3>Analysis Workspace</h3>
 
-<div class="stat">
-<small>Robot Status</small>
-<strong>Not connected</strong>
-</div>
+    <p class="large-text">
+      Select an instrument and timeframe to explore
+      an illustrative technical analysis example.
+      No live prices or trading signals are generated.
+    </p>
 
-<div class="stat">
-<small>Market Data</small>
-<strong>Unavailable</strong>
-</div>
+    <div class="form-grid">
 
-<div class="stat">
-<small>Account</small>
-<strong>Demo</strong>
-</div>
+      <div class="field">
+        <label>Currency Pair</label>
+        <select id="pair">
+          <option>EUR/USD</option>
+          <option>GBP/USD</option>
+          <option>USD/JPY</option>
+          <option>USD/CHF</option>
+          <option>AUD/USD</option>
+        </select>
+      </div>
 
-</div>
+      <div class="field">
+        <label>Timeframe</label>
+        <select id="timeframe">
+          <option>M15</option>
+          <option>H1</option>
+          <option>H4</option>
+          <option>D1</option>
+        </select>
+      </div>
 
-<p style="color:#91a7c2;margin-top:22px;font-size:13px">
-Demonstration interface. Live market data and
-automated trading are not connected.
-</p>
+    </div>
 
-</div>
+    <button class="primary-btn" id="analyzeBtn">
+      Generate Demo Report
+    </button>
+
+    <div class="result" id="result">
+
+      <span class="demo-tag">ILLUSTRATIVE RESULT</span>
+
+      <h2 id="resultPair" class="blue">EUR/USD</h2>
+
+      <div class="status-line">
+        <span>Selected timeframe</span>
+        <strong id="resultTime">M15</strong>
+      </div>
+
+      <div class="status-line">
+        <span>EMA concept</span>
+        <strong>Trend analysis</strong>
+      </div>
+
+      <div class="status-line">
+        <span>RSI concept</span>
+        <strong>Momentum</strong>
+      </div>
+
+      <div class="status-line">
+        <span>MACD concept</span>
+        <strong>Trend confirmation</strong>
+      </div>
+
+      <p>
+        This is a demonstration of the analyzer interface,
+        not an actual calculation from market data.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="panel">
+    <h3>Technical Indicators</h3>
+
+    <div class="status-line">
+      <span>EMA</span><span>Moving average concept</span>
+    </div>
+
+    <div class="status-line">
+      <span>RSI</span><span>Momentum concept</span>
+    </div>
+
+    <div class="status-line">
+      <span>MACD</span><span>Trend comparison concept</span>
+    </div>
+
+    <div class="status-line">
+      <span>ATR</span><span>Volatility concept</span>
+    </div>
+
+  </div>
+
 </section>
 
-<section id="plans">
-<h2 class="section-title">Our Access Plans</h2>
+<!-- MARKETS -->
 
-<div class="cards">
+<section class="screen" id="markets">
 
-<div class="card">
-<h3>Free Access</h3>
-<p>
-Explore the CASSIUS platform and its available
-introductory features.
-</p>
-</div>
+  <div class="section-head">
+    <div>
+      <h2>Market Intelligence</h2>
+      <p>Explore financial market concepts</p>
+    </div>
+  </div>
 
-<div class="card">
-<h3>Premium Access</h3>
-<p>
-Planned advanced platform features.
-Pricing and availability will be announced later.
-</p>
-</div>
+  <div class="grid">
 
-</div>
+    <div class="card">
+      <h3>EUR/USD</h3>
+      <h2 class="blue">Forex</h2>
+      <p class="description">Euro and US Dollar</p>
+    </div>
+
+    <div class="card">
+      <h3>GBP/USD</h3>
+      <h2 class="blue">Forex</h2>
+      <p class="description">British Pound and US Dollar</p>
+    </div>
+
+    <div class="card">
+      <h3>USD/JPY</h3>
+      <h2 class="blue">Forex</h2>
+      <p class="description">US Dollar and Japanese Yen</p>
+    </div>
+
+    <div class="card">
+      <h3>AUD/USD</h3>
+      <h2 class="blue">Forex</h2>
+      <p class="description">Australian Dollar and US Dollar</p>
+    </div>
+
+  </div>
+
+  <div class="panel">
+    <h3>Market Data Notice</h3>
+    <p class="large-text">
+      The instruments displayed are educational examples.
+      This page does not currently retrieve exchange rates,
+      broker prices or real-time market information.
+    </p>
+  </div>
+
 </section>
 
-<section id="mission" class="mission">
-<h2 class="section-title">Our Mission</h2>
+<!-- TECHNOLOGY -->
 
-<div class="dashboard">
-<p style="color:#b7c7da">
-CASSIUS TRADING TECHNOLOGIES aims to make
-trading technology and market analysis tools
-more accessible through innovative software
-development.
-</p>
-</div>
+<section class="screen" id="technology">
+
+  <div class="section-head">
+    <div>
+      <h2>Our Technology</h2>
+      <p>Software, analytics and innovation</p>
+    </div>
+  </div>
+
+  <div class="feature-grid">
+
+    <div class="card">
+      <div class="feature-icon">📊</div>
+      <h3>FX Analyzer</h3>
+      <p class="large-text">
+        A technical analysis interface for exploring
+        financial market indicators.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="feature-icon">🤖</div>
+      <h3>MT5 Integration</h3>
+      <p class="large-text">
+        A planned connection to MetaTrader 5
+        for future data integration.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="feature-icon">🧠</div>
+      <h3>Market Intelligence</h3>
+      <p class="large-text">
+        Tools for understanding market structure,
+        indicators and price behaviour.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PLANS -->
+
+<section class="screen" id="plans">
+
+  <div class="section-head">
+    <div>
+      <h2>Access Plans</h2>
+      <p>Platform access information</p>
+    </div>
+  </div>
+
+  <div class="feature-grid">
+
+    <div class="card">
+      <h3>Free Access</h3>
+      <h2 class="blue">Free</h2>
+      <p class="large-text">
+        Explore the educational interface and
+        available demonstration features.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Premium Access</h3>
+      <h2>Coming Soon</h2>
+      <p class="large-text">
+        Future advanced features and services
+        will be announced when available.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="screen" id="about">
+
+  <div class="section-head">
+    <h2>About CASSIUS</h2>
+  </div>
+
+  <div class="panel">
+    <h3>CASSIUS TRADING TECHNOLOGIES</h3>
+
+    <p class="large-text">
+      CASSIUS TRADING TECHNOLOGIES is a software
+      development initiative focused on financial
+      technology, market intelligence and accessible
+      analytical tools.
+    </p>
+
+    <br>
+
+    <h3>Our Vision</h3>
+
+    <p class="large-text">
+      To develop innovative technology that makes
+      financial market information and analytical
+      software more accessible.
+    </p>
+
+    <br>
+
+    <h3>Our Principles</h3>
+
+    <p class="large-text">
+      Innovation · Transparency · Technology · Education
+    </p>
+
+  </div>
+
 </section>
 
 </main>
 
-<footer>
-<p><strong>CASSIUS TRADING TECHNOLOGIES</strong></p>
-<p>Technology • Innovation • Market Intelligence</p>
-<p>© 2026 CASSIUS. All rights reserved.</p>
-<p>Trading involves risk. No profits or returns are guaranteed.</p>
+<footer class="footer">
+  <strong>CASSIUS TRADING TECHNOLOGIES</strong>
+  <p>Technology · Innovation · Market Intelligence</p>
+  <p>© 2026 CASSIUS. All rights reserved.</p>
+  <p>Educational demonstration only. Financial markets involve risk.</p>
 </footer>
 
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
-const menuBtn = document.getElementById("menuBtn");
-const mainNav = document.getElementById("mainNav");
 
-menuBtn.addEventListener("click", function(){
-const isOpen = mainNav.classList.toggle("open");
-menuBtn.setAttribute("aria-expanded", isOpen);
-menuBtn.setAttribute(
-"aria-label",
-isOpen ? "Close navigation menu" : "Open navigation menu"
-);
-menuBtn.textContent = isOpen ? "✕" : "☰";
+// SCREEN NAVIGATION
+
+const screens = document.querySelectorAll(".screen");
+const navButtons = document.querySelectorAll("[data-screen]");
+const pageTitle = document.getElementById("pageTitle");
+
+function showScreen(name) {
+
+  screens.forEach(screen => {
+    screen.classList.toggle("active",screen.id === name);
+  });
+
+  navButtons.forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.screen === name
+    );
+  });
+
+  const activeButton = document.querySelector(
+    '[data-screen="' + name + '"]'
+  );
+
+  pageTitle.textContent = activeButton
+    ? activeButton.textContent.trim()
+    : name;
+
+  document.getElementById("sidebar").classList.remove("open");
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+navButtons.forEach(button => {
+  button.addEventListener("click",() => {
+    showScreen(button.dataset.screen);
+  });
 });
 
-mainNav.querySelectorAll("a").forEach(function(link){
-link.addEventListener("click", function(){
-mainNav.classList.remove("open");
-menuBtn.setAttribute("aria-expanded", "false");
-menuBtn.setAttribute("aria-label", "Open navigation menu");
-menuBtn.textContent = "☰";
+document.querySelectorAll("[data-go]").forEach(button => {
+  button.addEventListener("click",() => {
+    showScreen(button.dataset.go);
+  });
 });
+
+// MOBILE MENU
+
+document.getElementById("menuToggle").addEventListener("click",() => {
+  document.getElementById("sidebar").classList.toggle("open");
 });
+
+// THEME SWITCHING
+
+function toggleTheme() {
+  document.body.classList.toggle("light");
+
+  const light = document.body.classList.contains("light");
+
+  localStorage.setItem("cassiusTheme",light ? "light" : "dark");
+
+  notify(light ? "Light theme activated" : "Dark theme activated");
+}
+
+if(localStorage.getItem("cassiusTheme") === "light") {
+  document.body.classList.add("light");
+}
+
+document.getElementById("themeBtn").addEventListener("click",toggleTheme);
+document.getElementById("themeSidebar").addEventListener("click",toggleTheme);
+
+// DEMO ANALYZER
+
+document.getElementById("analyzeBtn").addEventListener("click",() => {
+
+  const pair = document.getElementById("pair").value;
+  const timeframe = document.getElementById("timeframe").value;
+
+  document.getElementById("resultPair").textContent = pair;
+  document.getElementById("resultTime").textContent = timeframe;
+
+  document.getElementById("result").classList.add("show");
+
+  notify("Illustrative demo report generated");
+});
+
+// NOTIFICATIONS
+
+let toastTimer;
+
+function notify(message) {
+
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  },2500);
+
+}
+
 </script>
 
 </body>
